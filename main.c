@@ -80,6 +80,18 @@ int main() {
     Block block;
     // 游戏区域映射为数组
     int pile[HEIGHT][WIDTH] = {0};
+    //边界赋其他值来区分
+    for (int i = 0; i < HEIGHT; ++i) {
+        pile[i][0]=2;
+        pile[i][WIDTH-1]=2;
+    }
+    for (int j = 1; j < WIDTH-1; ++j) {
+        pile[0][j]=2;
+    }
+    for (int j = 1; j < WIDTH-1; ++j) {
+        pile[HEIGHT-1][j]=2;
+    }
+
 
     WINDOW *win = createWin(&border);
 
