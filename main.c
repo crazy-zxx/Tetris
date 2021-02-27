@@ -240,6 +240,7 @@ int checkEliminate(WINDOW *win, int pile[][WIDTH], Border border) {
         }
         if (count == border.width - 2) { //行满，其上依次下移覆盖
             for (int l = 1; l < border.width - 1; ++l) {
+                pile[i][l]=0;
                 mvwaddch(win, i, l, ' ');
                 wrefresh(win);
                 usleep(50000);
@@ -247,6 +248,7 @@ int checkEliminate(WINDOW *win, int pile[][WIDTH], Border border) {
             for (int k = i; k > 1; --k) {
                 for (int l = 1; l < border.width - 1; ++l) {
                     pile[k][l] = pile[k - 1][l];
+                    pile[k - 1][l]=0;
                     if (pile[k][l]) {
                         mvwaddch(win, k, l, '#');
                     }
@@ -255,9 +257,9 @@ int checkEliminate(WINDOW *win, int pile[][WIDTH], Border border) {
             }
             wrefresh(win);
             //最上行置0
-            for (int l = 1; l < border.width - 1; ++l) {
-                pile[1][l] = 0;
-            }
+            //for (int l = 1; l < border.width - 1; ++l) {
+            //    pile[1][l] = 0;
+            //}
             lines++;
             i++;    //继续判断当前行
         }
